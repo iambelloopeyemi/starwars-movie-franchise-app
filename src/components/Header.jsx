@@ -1,13 +1,14 @@
+import styled from "styled-components";
 import logo from "../assets/starwars logo.png";
 import "../styles/Header.css"
 
-export default function Header() {
-  return (
-    <header>
-      <Logo />
-    </header>
-  )
-}
+const Header = styled.header`
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+`;
 
 export function Logo() {
   return (
@@ -16,3 +17,5 @@ export function Logo() {
     </div>
   );
 }
+
+export default Header;

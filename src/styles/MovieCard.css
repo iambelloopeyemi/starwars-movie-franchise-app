@@ -1,0 +1,51 @@
+.movie-card-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.movie-card {
+    width: 350px;
+    height: 318px;
+    padding: 20px;
+    margin: auto;
+    border: 1px solid black;
+    background-color: black;
+    border-radius: 10px;
+    z-index: 1;
+    background-image: url(../assets/bgCard1.0.png);
+}
+
+.movie-card:hover {
+    outline: 2px groove skyblue;
+}
+
+.movie-card-heading {
+    margin-bottom: 17px;
+}
+
+.title {
+    font-size: 22px;
+}
+
+.release-date {
+    font-size: 14px;
+}
+
+.opening-crawl {
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+hr {
+    height: 2px;
+    border-color: red;
+}
+
+.more-info-wrapper {
+    margin-top: 12px;
+}
+
+.more-info {
+    color: yellow;
+}

@@ -6,7 +6,9 @@ import Body from "./components/Body";
 function App() {
   return (
     <div>
-      <Header />
+      <Header>
+        <Logo />
+      </Header>
       <Body />
     </div>
   );

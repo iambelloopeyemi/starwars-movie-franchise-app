@@ -4,7 +4,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 1px solid black;
 }
 
 ul,
@@ -18,4 +17,11 @@ a {
 
 img {
   display: block;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
+  color: white;
+  z-index: -1;
 }
