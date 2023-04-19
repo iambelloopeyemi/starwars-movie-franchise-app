@@ -13,7 +13,7 @@
     background-color: black;
     border-radius: 10px;
     z-index: 1;
-    background-image: url(../assets/bgCard1.0.png);
+    background-image: url(../assets/bgCard1.png);
 }
 
 .movie-card:hover {
