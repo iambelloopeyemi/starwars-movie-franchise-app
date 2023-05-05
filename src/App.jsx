@@ -1,15 +1,19 @@
-import { useState } from "react";
-import { Logo } from "./components/Header";
 import Header from "./components/Header";
-import Body from "./components/Body";
+import Home from "./Pages/Home";
+import MoreInfo from "./Pages/MoreInfo"
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
     <div>
-      <Header>
-        <Logo />
-      </Header>
-      <Body />
+      {/* HEADER */}
+      <Header />
+
+      {/* ROUTING */}
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/more-info' element={<MoreInfo />} />
+      </Routes>
     </div>
   );
 }
