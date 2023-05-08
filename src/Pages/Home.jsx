@@ -27,7 +27,13 @@ export default function Home() {
   return (
     <main className="relative">
       <div className="fixed offset">
-        {loading && <img className="w-20 h-20 animate-spin-slow" src={deathStar} />}
+        {loading && (
+          <img
+            src={deathStar}
+            alt="Death Star Logo"
+            className="w-20 h-20 animate-spin-slow"
+          />
+        )}
       </div>
       <div>
         {error && (
