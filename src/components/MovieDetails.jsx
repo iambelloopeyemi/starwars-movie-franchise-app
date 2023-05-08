@@ -11,19 +11,21 @@ export default function MovieDetails({ data }) {
   const [speciesData, setSpeciesData] = useState([]);
   const [starshipsData, setStarshipsData] = useState([]);
   const [vehiclesData, setVehiclesData] = useState([]);
-  
+
   // REACT ROUTER HOOKS
   const { id } = useParams();
   const navigate = useNavigate();
 
   // ROUTING VALIDATION AND NESTED API CALLS
   useEffect(() => {
-    const details = data.find((detail) => detail.episode_id === Number(id));
-    if (details) {
-      setDetails(details);
-    }
     const fetchData = async () => {
       try {
+        const details = await data.find(
+          (detail) => detail.episode_id === Number(id)
+        );
+        if (details) {
+          setDetails(details);
+        }
         await axios
           .all(details.characters.map((character) => axios.get(character)))
           .then((data) => setCharacterData(data));
@@ -46,7 +48,7 @@ export default function MovieDetails({ data }) {
     fetchData();
   }, [id]);
 
-  // RENDERED LIST FROM NESTED API
+  // RENDERED LIST FROM NESTED API CALLS
   const charactersList = characterData.map((character, index) => {
     return <li key={index}>{character.data.name}</li>;
   });

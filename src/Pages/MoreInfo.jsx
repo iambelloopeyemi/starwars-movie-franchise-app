@@ -4,6 +4,7 @@ import deathStar from "../assets/death_star.png";
 import MovieDetails from "../components/MovieDetails";
 
 export default function MoreInfo() {
+  // REACT USESTATE HOOKS
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

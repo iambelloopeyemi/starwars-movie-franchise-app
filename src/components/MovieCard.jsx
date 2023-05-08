@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "../assets/BackgroundImage.scss";
 
 export default function MovieCard({ data }) {
+  // RENDERED LIST FROM A PROPS
   const CardItem = data.map(
     ({ episode_id, title, release_date, opening_crawl }, index) => {
       return (

@@ -4,6 +4,7 @@ import deathStar from "../assets/death_star.png";
 import MovieCard from "../components/MovieCard";
 
 export default function Home() {
+  // REACT USESTATE HOOKS
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
