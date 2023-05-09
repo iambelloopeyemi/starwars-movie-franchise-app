@@ -75,7 +75,7 @@ export default function MovieDetails({ data }) {
   };
 
   return (
-    <div className="rounded p-8 flex-col bg-neutral-800 z-10 cursor-pointer">
+    <div className="rounded p-8 flex-col gap-3 bg-neutral-800 z-10 cursor-pointer">
       <div className="mb-6" onClick={handleClick}>
         <div className="flex gap-1">
           <svg
