@@ -1,125 +1,89 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+// LIBRARY
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 export default function MovieDetails({ data }) {
-  // REACT USESTATE HOOKS
-  const [details, setDetails] = useState("");
-  const [characterData, setCharacterData] = useState([]);
-  const [planetsData, setPlanetsData] = useState([]);
-  const [speciesData, setSpeciesData] = useState([]);
-  const [starshipsData, setStarshipsData] = useState([]);
-  const [vehiclesData, setVehiclesData] = useState([]);
-
-  // REACT ROUTER HOOKS
-  const { id } = useParams();
+  // HOOKS
   const navigate = useNavigate();
 
-  // ROUTING VALIDATION AND NESTED API CALLS
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const details = await data.find(
-          (detail) => detail.episode_id === Number(id)
-        );
-        if (details) {
-          setDetails(details);
-        }
-        await axios
-          .all(details.characters.map((character) => axios.get(character)))
-          .then((data) => setCharacterData(data));
-        axios
-          .all(details.planets.map((planet) => axios.get(planet)))
-          .then((data) => setPlanetsData(data));
-        axios
-          .all(details.species.map((specie) => axios.get(specie)))
-          .then((data) => setSpeciesData(data));
-        axios
-          .all(details.starships.map((starship) => axios.get(starship)))
-          .then((data) => setStarshipsData(data));
-        axios
-          .all(details.vehicles.map((vehicle) => axios.get(vehicle)))
-          .then((data) => setVehiclesData(data));
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-    fetchData();
-  }, [id]);
-
-  // RENDERED LIST FROM NESTED API CALLS
-  const charactersList = characterData.map((character, index) => {
-    return <li key={index}>{character.data.name}</li>;
+  // Rendered list from a props
+  const charactersList = data.characters.map((character) => {
+    return <li key={character.url}>{character.name}</li>;
   });
 
-  const planetsList = planetsData.map((planet, index) => {
-    return <li key={index}>{planet.data.name}</li>;
+  const planetsList = data.planets.map((planet) => {
+    return <li key={planet.url}>{planet.name}</li>;
   });
 
-  const speciesList = speciesData.map((specie, index) => {
-    return <li key={index}>{specie.data.name}</li>;
+  const speciesList = data.species.map((specie) => {
+    return <li key={specie.url}>{specie.name}</li>;
   });
 
-  const starshipsList = starshipsData.map((starship, index) => {
-    return <li key={index}>{starship.data.name}</li>;
+  const starshipsList = data.starships.map((starship) => {
+    return <li key={starship.url}>{starship.name}</li>;
   });
 
-  const vehiclesList = vehiclesData.map((vehicle, index) => {
-    return <li key={index}>{vehicle.data.name}</li>;
+  const vehiclesList = data.vehicles.map((vehicle) => {
+    return <li key={vehicle.url}>{vehicle.name}</li>;
   });
 
-  // NAVIGATION FUNCTION
+  // Navigation function
   const handleClick = () => {
-    navigate(-1);
+    navigate("/");
   };
 
   return (
-    <div className="rounded p-8 flex-col gap-3 bg-neutral-800 z-10 cursor-pointer">
-      <div className="mb-6" onClick={handleClick}>
-        <div className="flex gap-1">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 18"
-            strokeWidth={0.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
-            />
-          </svg>
-          <span className="">Back to List</span>
+    <div className="px-28 mb-10">
+      <div className="rounded p-8 flex-col bg-neutral-800 z-10 cursor-pointer">
+        <div className="mb-6" onClick={handleClick}>
+          <div className="flex gap-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 18"
+              strokeWidth={0.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+              />
+            </svg>
+            <span className="">Back to List</span>
+          </div>
+          <div className="text-center text-4xl font-semibold mb-4">
+            {data.title}
+          </div>
+          <div className="text-center text-base mb-3">
+            Director : {data.director}
+          </div>
+          <div className="text-center text-base">
+            Producer : {data.producer}
+          </div>
         </div>
-        <div className="text-center text-4xl font-semibold mb-4">
-          {details.title}
+        <div className="mb-5">Description</div>
+        <div className="mb-5">{data.opening_crawl}</div>
+        <div className="mb-5">
+          <span className="block mb-3 text-lg">Characters</span>{" "}
+          <ul className="grid grid-cols-4 list-disc list-inside">{charactersList}</ul>
         </div>
-        <div className="text-center text-base mb-3">
-          Director : {details.director}
+        <div className="mb-5">
+          <span className="block mb-3 text-lg">Planets</span>{" "}
+          <ul className="grid grid-cols-4 list-disc list-inside">{planetsList}</ul>
         </div>
-        <div className="text-center text-base">
-          Producer : {details.producer}
+        <div className="mb-5">
+          <span className="block mb-3 text-lg">Species</span>{" "}
+          <ul className="grid grid-cols-4 list-disc list-inside">{speciesList}</ul>
         </div>
-      </div>
-      <div>Description</div>
-      <div>{details.opening_crawl}</div>
-      <div>
-        Characters <ul>{charactersList}</ul>
-      </div>
-      <div>
-        Planets <ul>{planetsList}</ul>
-      </div>
-      <div>
-        Species <ul>{speciesList}</ul>
-      </div>
-      <div>
-        Starships <ul>{starshipsList}</ul>
-      </div>
-      <div>
-        Vehicles <ul>{vehiclesList}</ul>
+        <div className="mb-5">
+          <span className="block mb-3 text-lg">Starships</span>{" "}
+          <ul className="grid grid-cols-4 list-disc list-inside">{starshipsList}</ul>
+        </div>
+        <div className="mb-5">
+          <span className="block mb-3 text-lg">Vehicles</span>{" "}
+          <ul className="grid grid-cols-4 list-disc list-inside">{vehiclesList}</ul>
+        </div>
       </div>
     </div>
   );

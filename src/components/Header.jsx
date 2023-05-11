@@ -1,3 +1,4 @@
+// IMAGE
 import logo from "../assets/star_wars_logo.png";
 
 export default function Header() {
