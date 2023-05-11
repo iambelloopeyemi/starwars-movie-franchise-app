@@ -1,13 +1,21 @@
+// LIBRARY
 import { Link } from "react-router-dom";
+// STYLE
 import "../assets/BackgroundImage.scss";
 
 export default function MovieCard({ data }) {
-  // RENDERED LIST FROM A PROPS
+  // Rendered list from a props
   const CardItem = data.map(
-    ({ episode_id, title, release_date, opening_crawl }, index) => {
+    ({ url, title, release_date, opening_crawl }, index) => {
+      const extractPathFromURL = (url) => {
+        const path = url.split("/");
+        const extractedPath = `${path[path.length - 2]}`;
+        return extractedPath;
+      };
+      const id = extractPathFromURL(url);
       return (
         <li
-          key={episode_id}
+          key={url}
           className={`rounded-lg p-5 cursor-pointer hover:shadow-skyblue bg_img_${index}`}
         >
           <div className="mb-4">
@@ -27,10 +35,7 @@ export default function MovieCard({ data }) {
           </div>
           <hr className="border-0 h-0.5 bg-red-600 mb-2" />
           <div>
-            <Link
-              to={`/more-info/${episode_id}`}
-              className="text-sm text-yellow-300"
-            >
+            <Link to={`/more-info/${id}`} className="text-sm text-yellow-300">
               More Info
             </Link>
           </div>
@@ -39,8 +44,10 @@ export default function MovieCard({ data }) {
     }
   );
   return (
-    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      {CardItem}
-    </ul>
+    <div className="px-28 mb-10">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {CardItem}
+      </ul>
+    </div>
   );
 }

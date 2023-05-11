@@ -1,8 +1,11 @@
+// LIBRARY
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import "./main.scss";
 import { BrowserRouter } from "react-router-dom";
+// COMPONENT
+import App from "./App";
+// STYLE
+import "./main.scss";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
